@@ -1,11 +1,29 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
+apply plugin: 'maven'
 
 group = 'org.cloudec'
 version = '0.1'
 docsDirName = 'docs'
 
+loadConfiguration()
+
+def loadConfiguration() {
+    def bintray_settings = hasProperty('bintray') ? bintray : '_,_'
+    project.ext.set 'bintray_user', bintray_settings.split(',')[0]
+    project.ext.set 'bintray_api_key', bintray_settings.split(',')[1]
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
+    }
+}
+apply plugin: 'com.jfrog.bintray'
 
 repositories {
     mavenCentral()
@@ -26,4 +44,46 @@ task myJavadocs(type: Javadoc) {
     source = sourceSets.main.allJava
     destinationDir=file("docs/javadoc/${project.name}")
     classpath = files(configurations.compile)
+}
+
+
+
+configurations {
+    published
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// Add the sourceJars to non-extractor modules
+artifacts {
+    published sourceJar
+    published javadocJar
+}
+
+bintray {
+    user = bintray_user
+    key = bintray_api_key
+    configurations = ['published', 'archives'] //When uploading configuration files
+
+    dryRun = false //Whether to run this as dry-run, without deploying
+    publish = true //If version should be auto published after an upload
+    pkg {
+        repo = 'maven'
+//        userOrg = 'cloudec' //An optional organization name when the repo belongs to one of the user's orgs
+        name = 'paginator-java'
+        desc = 'Paginator for Java collections.'
+        websiteUrl = 'https://github.com/joaolourenco/paginator-java'
+        issueTrackerUrl = 'https://github.com/joaolourenco/paginator-java/issues'
+        vcsUrl = 'https://github.com/joaolourenco/paginator-java.git'
+        licenses = ['MIT']
+        labels = ['paginator', 'java']
+        publicDownloadNumbers = true
+    }
 }

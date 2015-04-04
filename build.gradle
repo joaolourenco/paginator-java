@@ -20,7 +20,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
     }
 }
 apply plugin: 'com.jfrog.bintray'
@@ -76,7 +76,8 @@ bintray {
     publish = true //If version should be auto published after an upload
     pkg {
         repo = 'maven'
-//        userOrg = 'cloudec' //An optional organization name when the repo belongs to one of the user's orgs
+//        userOrg = 'cloudec' 
+//An optional organization name when the repo belongs to one of the user's orgs
         name = 'paginator-java'
         desc = 'Paginator for Java collections.'
         websiteUrl = 'https://github.com/joaolourenco/paginator-java'

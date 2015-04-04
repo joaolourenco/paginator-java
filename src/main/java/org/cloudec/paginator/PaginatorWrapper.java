@@ -20,7 +20,7 @@ public class PaginatorWrapper<T> {
     private Integer previus;
     private Integer first;
     private Integer last;
-    private List<Integer> paginas;
+    private List<Integer> pages;
     private final Integer totalCount;
 
     /**
@@ -61,12 +61,12 @@ public class PaginatorWrapper<T> {
      * Configure pages and index.
      */
     private void setup() {
-        this.paginas = new ArrayList<Integer>();
+        this.pages = new ArrayList<Integer>();
         for (Integer i = 0; i < totalCount; i++) {
-            if (i == 0) paginas.add(i);
-            if (i % limit == 0 && (i + limit) < totalCount) paginas.add(i + limit);
+            if (i == 0) pages.add(i);
+            if (i % limit == 0 && (i + limit) < totalCount) pages.add(i + limit);
         }
-        this.last = paginas.size() > 0 ? paginas.get(paginas.size()-1) : 0 ;
+        this.last = pages.size() > 0 ? pages.get(pages.size()-1) : 0 ;
         this.next = totalCount == limit ? 0 : current + limit;
         this.previus = Math.max(0, current - limit);
 
@@ -89,7 +89,7 @@ public class PaginatorWrapper<T> {
     }
 
     public Integer getPageCurrent() {
-        return paginas != null && !paginas.isEmpty() ? paginas.indexOf(current) + 1 : 0;
+        return pages != null && !pages.isEmpty() ? pages.indexOf(current) + 1 : 0;
     }
 
     /**
@@ -136,8 +136,8 @@ public class PaginatorWrapper<T> {
      *
      * @return All first index of pages.
      */
-    public Collection<Integer> getPaginas() {
-        return paginas;
+    public Collection<Integer> getPages() {
+        return pages;
     }
 }
 

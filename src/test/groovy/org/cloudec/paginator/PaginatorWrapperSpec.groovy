@@ -58,7 +58,7 @@ class PaginatorWrapperSpec extends Specification {
 
     def mountPage(data, offset, limit) {
         if (!offset) offset = 0
-        data[Math.min(offset, data.size())..Math.min(offset + limit - 1, data.size())]
+        data[Math.min(offset, data.size())..<Math.min(offset + limit, data.size())]
     }
 
 

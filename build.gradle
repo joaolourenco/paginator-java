@@ -4,7 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 
 group = 'org.cloudec'
-version = '0.1'
+version = '0.1.1'
 docsDirName = 'docs'
 
 loadConfiguration()
@@ -76,15 +76,21 @@ bintray {
     publish = true //If version should be auto published after an upload
     pkg {
         repo = 'maven'
-//        userOrg = 'cloudec' 
+// userOrg = 'cloudec'
 //An optional organization name when the repo belongs to one of the user's orgs
         name = 'paginator-java'
-        desc = 'Paginator for Java collections.'
+        desc = 'Pagination for Java collections.'
         websiteUrl = 'https://github.com/joaolourenco/paginator-java'
         issueTrackerUrl = 'https://github.com/joaolourenco/paginator-java/issues'
         vcsUrl = 'https://github.com/joaolourenco/paginator-java.git'
         licenses = ['MIT']
         labels = ['paginator', 'java']
         publicDownloadNumbers = true
+        version {
+            name = '0.1.1' //Bintray logical version name
+            desc = 'Pagination for Java collections.'
+            released  = '2015-04-04 20:15:00'
+            vcsTag = '0.1.1'
+        }
     }
 }

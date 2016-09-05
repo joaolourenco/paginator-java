@@ -20,7 +20,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
     }
 }
 apply plugin: 'com.jfrog.bintray'
@@ -32,11 +32,11 @@ repositories {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
+    gradleVersion = '2.13'
 }
 
 dependencies {
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0' 
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'cglib:cglib-nodep:2.2' //permite mock de objetos não Interface
 }
 
@@ -80,16 +80,16 @@ bintray {
 //An optional organization name when the repo belongs to one of the user's orgs
         name = 'paginator-java'
         desc = 'Pagination for Java collections.'
-        websiteUrl = 'https://github.com/joaolourenco/paginator-java'
-        issueTrackerUrl = 'https://github.com/joaolourenco/paginator-java/issues'
-        vcsUrl = 'https://github.com/joaolourenco/paginator-java.git'
+        websiteUrl = 'https://github.com/lourencoccc/paginator-java'
+        issueTrackerUrl = 'https://github.com/lourencoccc/paginator-java/issues'
+        vcsUrl = 'https://github.com/lourencoccc/paginator-java.git'
         licenses = ['MIT']
         labels = ['paginator', 'java']
         publicDownloadNumbers = true
         version {
             name = '0.1.1' //Bintray logical version name
             desc = 'Pagination for Java collections.'
-            released  = '2015-04-04 20:15:00'
+            //released  = new Date()
             vcsTag = '0.1.1'
         }
     }
